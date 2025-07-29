@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поднимись диван на жопу - MVP</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .status.mvp {
+            background: #28a745;
+            color: white;
+        }
+
+        .status.development {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 20px 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .tech-stack {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-stack h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .tech-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tech-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Поднимись диван на жопу</h1>
+            <p>Модульная платформа для разработки веб-приложений</p>
+            <span class="status mvp">MVP Версия</span>
+        </header>
+
+        <main class="main-content">
+            <h2>Добро пожаловать в MVP версию проекта!</h2>
+            <p>Это базовая версия платформы, которая демонстрирует основную архитектуру и возможности системы.</p>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🚀 Модульная архитектура</h3>
+                    <p>Система построена на модульной архитектуре, где каждое приложение является независимым модулем с собственными роутами, контроллерами и сервисами.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔧 Гибкая конфигурация</h3>
+                    <p>Настраиваемая система конфигурации с поддержкой переменных окружения и централизованным управлением настройками.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🛡️ Безопасность</h3>
+                    <p>Встроенная система аутентификации с JWT токенами, валидация данных и защита от основных типов атак.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📊 Мониторинг</h3>
+                    <p>Централизованное логирование, обработка ошибок и система мониторинга состояния приложений.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔌 API версионирование</h3>
+                    <p>Поддержка версионирования API для обеспечения обратной совместимости и плавного обновления.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🧪 Тестирование</h3>
+                    <p>Интегрированная система тестирования с поддержкой unit, integration и e2e тестов.</p>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Технологический стек</h3>
+                <div class="tech-list">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">JWT</span>
+                    <span class="tech-tag">Socket.io</span>
+                    <span class="tech-tag">PM2</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <a href="#" class="cta-button">Документация API</a>
+                <a href="#" class="cta-button">Админ панель</a>
+                <a href="#" class="cta-button">GitHub репозиторий</a>
+            </div>
+
+            <div style="background: #e9ecef; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>📋 Текущий статус разработки</h3>
+                <p><strong>Этап:</strong> MVP версия - базовая структура проекта</p>
+                <p><strong>Готовность:</strong> 15% от полной функциональности</p>
+                <p><strong>Следующие шаги:</strong> Настройка сервера, база данных, аутентификация</p>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2024 Поднимись диван на жопу. MVP версия.</p>
+            <p>Проект находится в активной разработке</p>
+        </footer>
+    </div>
+</body>
+</html> 

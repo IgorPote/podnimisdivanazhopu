@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование API - Поднимись диван на жопу</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .test-button:hover {
+            background: #0056b3;
+        }
+        .result {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .success { border-color: #28a745; background: #d4edda; }
+        .error { border-color: #dc3545; background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Тестирование API</h1>
+    <p>Эта страница поможет протестировать различные endpoints API.</p>
+
+    <div class="test-section">
+        <h2>Базовые тесты</h2>
+        <button class="test-button" onclick="testMainPage()">Тест главной страницы</button>
+        <button class="test-button" onclick="testHealthCheck()">Health Check</button>
+        <button class="test-button" onclick="test404()">Тест 404</button>
+        <div id="basic-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>Настройки сервера</h2>
+        <p><strong>Базовый URL:</strong> <input type="text" id="baseUrl" value="http://localhost:3000" style="width: 300px;"></p>
+        <button class="test-button" onclick="updateBaseUrl()">Обновить URL</button>
+    </div>
+
+    <script>
+        let baseUrl = 'http://localhost:3000';
+
+        function updateBaseUrl() {
+            baseUrl = document.getElementById('baseUrl').value;
+            showResult('basic-results', `URL обновлен на: ${baseUrl}`, 'success');
+        }
+
+        async function makeRequest(url, method = 'GET') {
+            try {
+                const response = await fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                const data = await response.json();
+                return {
+                    status: response.status,
+                    data: data,
+                    success: response.ok
+                };
+            } catch (error) {
+                return {
+                    status: 0,
+                    data: { error: error.message },
+                    success: false
+                };
+            }
+        }
+
+        function showResult(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${type}`;
+            resultDiv.textContent = `${new Date().toLocaleTimeString()}: ${message}`;
+            element.appendChild(resultDiv);
+        }
+
+        async function testMainPage() {
+            showResult('basic-results', 'Тестируем главную страницу...', 'info');
+            const result = await makeRequest(`${baseUrl}/`);
+            
+            if (result.success) {
+                showResult('basic-results', `✅ Главная страница работает! Статус: ${result.status}`, 'success');
+                showResult('basic-results', `Данные: ${JSON.stringify(result.data, null, 2)}`, 'success');
+            } else {
+                showResult('basic-results', `❌ Ошибка: ${result.status} - ${result.data.error}`, 'error');
+            }
+        }
+
+        async function testHealthCheck() {
+            showResult('basic-results', 'Тестируем health check...', 'info');
+            const result = await makeRequest(`${baseUrl}/health`);
+            
+            if (result.success) {
+                showResult('basic-results', `✅ Health check работает! Статус: ${result.status}`, 'success');
+                showResult('basic-results', `Данные: ${JSON.stringify(result.data, null, 2)}`, 'success');
+            } else {
+                showResult('basic-results', `❌ Ошибка: ${result.status} - ${result.data.error}`, 'error');
+            }
+        }
+
+        async function test404() {
+            showResult('basic-results', 'Тестируем 404...', 'info');
+            const result = await makeRequest(`${baseUrl}/nonexistent`);
+            
+            if (result.status === 404) {
+                showResult('basic-results', `✅ 404 работает корректно! Статус: ${result.status}`, 'success');
+                showResult('basic-results', `Данные: ${JSON.stringify(result.data, null, 2)}`, 'success');
+            } else {
+                showResult('basic-results', `❌ Неожиданный ответ: ${result.status}`, 'error');
+            }
+        }
+
+        // Автоматическое тестирование при загрузке страницы
+        window.onload = function() {
+            showResult('basic-results', 'Страница тестирования загружена. Готов к тестам!', 'success');
+        };
+    </script>
+</body>
+</html> 
