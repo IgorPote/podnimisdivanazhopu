@@ -67,4 +67,9 @@ logs
 
 # Build outputs
 dist/
-build/ 
+build/
+
+# Secrets and configuration files
+secrets.config
+.env
+*.env
